@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
 const classes = require('../Assets/classes');
 
 // creating an array of question to construct the SVG logo
@@ -27,9 +28,22 @@ const questions = [{
     choices: ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 }]
 
+function chooseShape(response) {
+    if (response.shape === "Circle") {
+        const logoShape = new Circle (response.shapeColor, response.text, response.textColor);
+        return logoShape.render();
+    } else if (response.shape === "Triangle") {
+        const logoShape = new Triangle (response.shapeColor, response.text, response.textColor);
+        return logoShape.render();
+    } else if (response.shape === "Square") {
+        const logoShape = new Square (response.shapeColor, response.text, response.textColor);
+        return logoShape.render();
+    };
+};
+
 function init() {
     inquirer.prompt(questions)
-.then((inquirerAnswers) => {
-console.log(inquirerAnswers);
+.then((response) => {
+console.log(response);
 });
 }
