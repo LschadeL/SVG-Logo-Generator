@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const classes = require('../Assets/classes');
+const classes = require('../Assets/classes.js');
+const logoEx = require('./logo.svg');
 
 // creating an array of question to construct the SVG logo
 
@@ -41,9 +42,16 @@ function chooseShape(response) {
     };
 };
 
+function generateLogo(response) {
+    const svg = chooseShape(response);
+    fs.writeFile(logoEx, svg, ()=> console.log('Logo Generated'));
+}
+
 function init() {
     inquirer.prompt(questions)
 .then((response) => {
-console.log(response);
+    generateLogo(response);
 });
 }
+
+init();
