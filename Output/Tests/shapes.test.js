@@ -1,9 +1,9 @@
 const { describe } = require('node:test');
-const shapes = require('./classes');
+const {Circle, Triangle, Square} = require('../../Assets/classes');
 
 describe('Circle', () => {
     it('should return a circular logo with the desired color and text attributes', () => {
-        const circle = new Circle('Black', 'LBS', 'White');
+        const circle = new Circle('black', 'LBS', 'white');
         expect(circle.render()).toEqual(
         `<svg version="1.1"
             width="300" height="200"
@@ -16,8 +16,8 @@ describe('Circle', () => {
 
 describe('Triangle', () => {
     it('should return a triangular logo with the desired color and text attributes', () => {
-        const triangle = new Triangle('Black', 'LBS', 'White');
-        expect(circle.render()).toEqual(
+        const triangle = new Triangle('black', 'LBS', 'white');
+        expect(triangle.render()).toEqual(
             `<svg version="1.1" 
             width="300" height="200"
             xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@ describe('Triangle', () => {
 
 describe('Square', () => {
     it('should return a square logo with the desired color and text attributes', () => {
-        const square = new Square('Black', 'LBS', 'White');
+        const square = new Square('black', 'LBS', 'white');
         expect(square.render()).toEqual(
             `<svg version="1.1"
             width="300" height="200"

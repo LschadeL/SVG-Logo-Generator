@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
-const fs = require('fs');
-const classes = require('../Assets/classes.js');
-const logoEx = require('./logo.svg');
+const {writeFile} = require('fs/promises');
+const {Circle, Square, Triangle} = require('../Assets/classes');
 
 // creating an array of question to construct the SVG logo
 
@@ -13,38 +12,39 @@ const questions = [{
 },
 {
     type: "input",
-    name: "letters",
+    name: "text",
     message: "Please type which three letters you would like to display inside the logo."
 },
 {
     type: "list",
-    name: "letter-color",
+    name: "textColor",
     message: "What color lettering should be generated?",
     choices: ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 },
 {
     type: "list",
-    name: "shape-color",
+    name: "shapeColor",
     message: "What color shape should be generated?",
     choices: ["White", "Black", "Red", "Orange", "Yellow", "Green", "Blue", "Purple"]
 }]
 
 function chooseShape(response) {
     if (response.shape === "Circle") {
-        const logoShape = new Circle (response.shapeColor, response.text, response.textColor);
+        const logoShape = new Circle(response.shapeColor, response.text, response.textColor);
         return logoShape.render();
     } else if (response.shape === "Triangle") {
-        const logoShape = new Triangle (response.shapeColor, response.text, response.textColor);
+        const logoShape = new Triangle(response.shapeColor, response.text, response.textColor);
         return logoShape.render();
     } else if (response.shape === "Square") {
-        const logoShape = new Square (response.shapeColor, response.text, response.textColor);
+        const logoShape = new Square(response.shapeColor, response.text, response.textColor);
         return logoShape.render();
     };
 };
 
-function generateLogo(response) {
-    const svg = chooseShape(response);
-    fs.writeFile(logoEx, svg, ()=> console.log('Logo Generated'));
+async function generateLogo(response) {
+    const svg = await chooseShape(response);
+    console.log(svg);
+    return writeFile("logo.svg", svg).then(() => console.log("SVG Generated"));
 }
 
 function init() {
@@ -52,6 +52,6 @@ function init() {
 .then((response) => {
     generateLogo(response);
 });
-}
+};
 
 init();

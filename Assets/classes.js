@@ -5,8 +5,8 @@ class Shape {
         this.shapeColor = shapeColor;
         this.text = text;
         this.textColor = textColor;
-    }
-}
+    };
+};
 
 class Circle extends Shape {
     constructor(shapeColor, text, textColor){
@@ -34,7 +34,7 @@ class Triangle extends Shape {
             <text x="100" y="185" font-size="70" text-anchor="middle" fill="${this.textColor}">${this.text}</text>
         </svg>`
     };
-}
+};
 
 class Square extends Shape {
     constructor(shapeColor, text, textColor){
@@ -48,8 +48,8 @@ class Square extends Shape {
             <text x="100" y="125" font-size="70" text-anchor="middle" fill="${this.textColor}">${this.text}</text>
         </svg>`
     };
-}
+};
 
 
 //exporting classes
-module.exports = Classes;
+module.exports = {Circle, Triangle, Square};
